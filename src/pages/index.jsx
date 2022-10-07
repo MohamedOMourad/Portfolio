@@ -1,10 +1,8 @@
 import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
-import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
-import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import {
   TwitterIcon,
@@ -12,18 +10,13 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
-import { generateRssFeed } from '@/lib/generateRssFeed'
-import { getAllArticles } from '@/lib/getAllArticles'
-import { formatDate } from '@/lib/formatDate'
+import misr from '@/images/logos/misr.jpg'
+import uber from '@/images/logos/uber.png'
+import orange from '@/images/logos/orange.png'
+import thebes from '@/images/logos/thebes.jpg'
+import iti from '@/images/logos/iti.png'
+import tawwr from '@/images/logos/tawwr.jpg'
+
 
 function MailIcon(props) {
   return (
@@ -84,20 +77,6 @@ function ArrowDownIcon(props) {
   )
 }
 
-function Article({ article }) {
-  return (
-    <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
-      </Card.Title>
-      <Card.Eyebrow as="time" dateTime={article.date} decorate>
-        {formatDate(article.date)}
-      </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
-    </Card>
-  )
-}
 
 function SocialLink({ icon: Icon, ...props }) {
   return (
@@ -139,35 +118,25 @@ function Newsletter() {
 function Resume() {
   let resume = [
     {
-      company: 'Planetaria',
-      title: 'CEO',
-      logo: logoPlanetaria,
+      company: 'Misr Insurance',
+      title: 'Compensation Department',
+      logo: misr,
+      start: '2022',
+      end: '2022',
+    },
+    {
+      company: 'Uber',
+      title: 'Back office Data Validation',
+      logo: uber,
       start: '2019',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear(),
-      },
+      end: '2020',
     },
     {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
-    },
-    {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
-    },
-    {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
+      company: 'Orange',
+      title: 'Customer Service',
+      logo: orange,
+      start: '2018',
+      end: false
     },
   ]
 
@@ -180,8 +149,8 @@ function Resume() {
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center">
+              <Image src={role.logo} alt="" className="h-10 w-10" unoptimized />
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
@@ -195,14 +164,13 @@ function Resume() {
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start.label ?? role.start} until ${
-                  role.end.label ?? role.end
-                }`}
+                aria-label={`${role.start.label ?? role.start} until ${role.end.label ? role.end && role.start : null
+                  }`}
               >
                 <time dateTime={role.start.dateTime ?? role.start}>
                   {role.start.label ?? role.start}
-                </time>{' '}
-                <span aria-hidden="true">—</span>{' '}
+                </time>
+                {role.end && <span aria-hidden="true"> — </span>}
                 <time dateTime={role.end.dateTime ?? role.end}>
                   {role.end.label ?? role.end}
                 </time>
@@ -211,37 +179,81 @@ function Resume() {
           </li>
         ))}
       </ol>
-      <Button href="https://drive.google.com/file/d/1Prm03j_PtenMaY0wX3t64T60sGnfVLoy/view?usp=sharing" variant="secondary" className="group mt-6 w-full">
-        Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-      </Button>
+      <div className='mx-auto mt-6 w-72 text-center'>
+        <Button href="https://drive.google.com/file/d/1Prm03j_PtenMaY0wX3t64T60sGnfVLoy/view?usp=sharing" variant="secondary" target="blank">
+          Download CV
+          <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        </Button>
+      </div>
     </div>
   )
 }
-
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+function Education() {
+  let education = [
+    {
+      institute: 'Tawwr',
+      title: 'Full stack Development trainee',
+      logo: tawwr,
+      start: '2022',
+      end: {
+        label: 'Present',
+        dateTime: new Date().getFullYear(),
+      },
+    },
+    {
+      institute: 'ITI',
+      title: 'Full stack Development trainee',
+      logo: iti,
+      start: '2021',
+      end: '2022',
+    },
+    {
+      institute: 'Thebes Academy',
+      title: 'Accounting and Finance (English Section)',
+      logo: thebes,
+      start: '2015',
+      end: '2019'
+    },
+  ]
 
   return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
-            key={image.src}
-            className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
-              rotations[imageIndex % rotations.length]
-            )}
-          >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
+    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <span className="ml-3">Education</span>
+      </h2>
+      <ol className="mt-6 space-y-4">
+        {education.map((role, roleIndex) => (
+          <li key={roleIndex} className="flex gap-4">
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center">
+              <Image src={role.logo} alt="" className="h-10 w-10" unoptimized />
+            </div>
+            <dl className="flex flex-auto flex-wrap gap-x-2">
+              <dt className="sr-only">Company</dt>
+              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                {role.institute}
+              </dd>
+              <dt className="sr-only">Role</dt>
+              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+                {role.title}
+              </dd>
+              <dt className="sr-only">Date</dt>
+              <dd
+                className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                aria-label={`${role.start.label ?? role.start} until ${role.end.label ? role.end && role.start : null
+                  }`}
+              >
+                <time dateTime={role.start.dateTime ?? role.start}>
+                  {role.start.label ?? role.start}
+                </time>
+                {role.end && <span aria-hidden="true"> — </span>}
+                <time dateTime={role.end.dateTime ?? role.end}>
+                  {role.end.label ?? role.end}
+                </time>
+              </dd>
+            </dl>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   )
 }
@@ -255,7 +267,7 @@ export default function Home({ articles }) {
         </title>
         <meta
           name="description"
-          content="I’m Mohamed, a Full-Stack Developer and entrepreneur based in Giza Egypt."
+          content="I'm Mohamed, a Full-Stack Developer and entrepreneur based in Giza Egypt."
         />
       </Head>
       <Container className="mt-9">
@@ -264,43 +276,44 @@ export default function Home({ articles }) {
             Full-Stack Developer, and amateur football player.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Mohamed, a full-stack developer based in Giza Egypt.
+            I'm Mohamed, a full-stack developer based in Giza Egypt.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
               href="https://twitter.com/mohamed_morad74"
               aria-label="Follow on Twitter"
               icon={TwitterIcon}
+              target="blank"
             />
             <SocialLink
               href="https://www.instagram.com/mohamed_morad74/"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
+              target="blank"
             />
             <SocialLink
               href="https://github.com/MohamedOMourad"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
+              target="blank"
             />
             <SocialLink
               href="https://www.linkedin.com/in/mohamed-osama-mourad/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
+              target="blank"
             />
           </div>
         </div>
       </Container>
-      <Photos />
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
+            <Education />
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
             <Resume />
+            <Newsletter />
           </div>
         </div>
       </Container>
@@ -308,16 +321,3 @@ export default function Home({ articles }) {
   )
 }
 
-export async function getStaticProps() {
-  if (process.env.NODE_ENV === 'production') {
-    await generateRssFeed()
-  }
-
-  return {
-    props: {
-      articles: (await getAllArticles())
-        .slice(0, 4)
-        .map(({ component, ...meta }) => meta),
-    },
-  }
-}
