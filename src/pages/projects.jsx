@@ -3,47 +3,54 @@ import Head from 'next/head'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAnimaginary from '@/images/logos/animaginary.svg'
-import logoCosmos from '@/images/logos/cosmos.svg'
-import logoHelioStream from '@/images/logos/helio-stream.svg'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import workout from '@/images/logos/workout.jpg'
+import chat from '@/images/logos/chat.png'
+import ecom from '@/images/logos/e-commerce.png'
+import food from '@/images/logos/food.png'
+import JWT from '@/images/logos/JWT.png'
 
 const projects = [
   {
-    name: 'Planetaria',
-    description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
+    name: 'Wunderman Thompson',
+    description: ' Wunderwomen Platform Women represents 56% of Wunderman Thompson&apos;s Family, in which each single women has contributed one way or another in the success WT has achieved nowadays.',
+    logo: JWT,
+    link: { href: 'https://jwt-coral.vercel.app/', label: 'JWT' },
+    github: { front: 'https://github.com/MustafaElgmal/JWT', back: '' }
   },
   {
-    name: 'Animaginary',
+    name: 'Workout Tracker App',
     description:
-      'High performance web animation library, hand-written in optimized WASM.',
+      'Tracking workouts or exercises puts an interesting spin on a regular scheduling app. You can do this with any type of recurring hobby',
+    link: { href: 'https://workout-next-r4v0fmhh1-moustafa.vercel.app/', label: 'github.com' },
+    logo: workout,
+    github: { front: 'https://github.com/MohamedOMourad/workout-app', back: '' }
+
+  },
+  {
+    name: 'E-Commerce App',
+    description:
+      'Do you dream of eventually selling things through your full stack application ideas? Consider building an e-commerce app to do so. An e-commerce app is just a digital storefront',
     link: { href: '#', label: 'github.com' },
-    logo: logoAnimaginary,
+    logo: ecom,
+    github: { front: 'https://github.com/MohamedOMourad/Ecommerce-app', back: '' }
+
   },
   {
-    name: 'HelioStream',
-    description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
-  },
-  {
-    name: 'cosmOS',
+    name: 'Chat app',
     description:
       'The operating system that powers our Planetaria space shuttles.',
     link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
+    logo: chat,
+    github: { front: 'https://github.com/MohamedOMourad/chat-app-frontend', back: 'https://github.com/MohamedOMourad/chat-app-API' }
+
   },
   {
-    name: 'OpenShuttle',
+    name: 'Application for food delivery',
     description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
+      'This app able to act as a link between cafes and customers. Restaurant proprietors  able to  display their menu items, as well as their prices.',
+    link: { href: 'https://restaurants-app-frontend.vercel.app/', label: 'github.com' },
+    logo: food,
+    github: { front: 'https://github.com/MohamedOMourad/Restaurants-App-frontend', back: 'https://github.com/MohamedOMourad/Restaurant-app-API' }
   },
 ]
 
@@ -59,10 +66,11 @@ function LinkIcon(props) {
 }
 
 export default function Projects() {
+
   return (
     <>
       <Head>
-        <title>Projects - Spencer Sharp</title>
+        <title>Projects - Mohamed Mourad</title>
         <meta
           name="description"
           content="Things I&apos;ve made trying to put my dent in the universe."
@@ -70,7 +78,7 @@ export default function Projects() {
       </Head>
       <SimpleLayout
         title="Things I&apos;ve made trying to put my dent in the universe."
-        intro="I&apos;ve worked on tons of little projects over the years but these are the ones that I&apos;m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+        intro="I&apos;ve worked on many of little projects but these are the ones that I&apos;m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
       >
         <ul
           role="list"
@@ -78,21 +86,24 @@ export default function Projects() {
         >
           {projects.map((project) => (
             <Card as="li" key={project.name}>
-              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full">
                 <Image
                   src={project.logo}
                   alt=""
-                  className="h-8 w-8"
-                  unoptimized
+                  className="h-10 w-10"
+
                 />
               </div>
               <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-                <Card.Link href={project.link.href}>{project.name}</Card.Link>
+                {project.name}
               </h2>
               <Card.Description>{project.description}</Card.Description>
-              <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
+              <p className=" z-10 mt-6 flex text-sm font-medium text-zinc-400 transition  dark:text-zinc-200">
                 <LinkIcon className="h-6 w-6 flex-none" />
-                <span className="ml-2">{project.link.label}</span>
+                <a href={project.github.front} target="blank" className="mr-10 hover:text-teal-500">{project.github.back ? "front" : "github"}</a>
+                <a href={project.github.back} target="blank" className="mr-10 hover:text-teal-500">{project.github.back && "back"}</a>
+                <LinkIcon className="h-6 w-6 flex-none" />
+                <a href={project.link.href} target="blank" className=" hover:text-teal-500">Take a Look!</a>
               </p>
             </Card>
           ))}
