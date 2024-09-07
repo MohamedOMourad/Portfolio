@@ -10,9 +10,13 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
-import nagwa from '@/images/logos/logo-shape.svg'
+import misr from '@/images/logos/misr.jpg'
+import uber from '@/images/logos/uber.png'
+import orange from '@/images/logos/orange.png'
 import thebes from '@/images/logos/thebes.jpg'
-import iti from '@/images/logos/iti.jpg'
+import iti from '@/images/logos/iti.png'
+import tawwr from '@/images/logos/tawwr.jpg'
+
 
 function MailIcon(props) {
   return (
@@ -73,6 +77,7 @@ function ArrowDownIcon(props) {
   )
 }
 
+
 function SocialLink({ icon: Icon, ...props }) {
   return (
     <Link className="group -m-1 p-1" {...props}>
@@ -113,11 +118,25 @@ function Newsletter() {
 function Resume() {
   let resume = [
     {
-      company: 'Nagwa',
-      title: 'Full stack Developer',
-      logo: nagwa,
-      start: 'jan, 2023',
-      end: 'present',
+      company: 'Misr Insurance',
+      title: 'Compensation Department',
+      logo: misr,
+      start: '2022',
+      end: '2022',
+    },
+    {
+      company: 'Uber',
+      title: 'Back office Data Validation',
+      logo: uber,
+      start: '2019',
+      end: '2020',
+    },
+    {
+      company: 'Orange',
+      title: 'Customer Service',
+      logo: orange,
+      start: '2018',
+      end: false
     },
   ]
 
@@ -145,9 +164,8 @@ function Resume() {
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start.label ?? role.start} until ${
-                  role.end.label ? role.end && role.start : null
-                }`}
+                aria-label={`${role.start.label ?? role.start} until ${role.end.label ? role.end && role.start : null
+                  }`}
               >
                 <time dateTime={role.start.dateTime ?? role.start}>
                   {role.start.label ?? role.start}
@@ -161,12 +179,8 @@ function Resume() {
           </li>
         ))}
       </ol>
-      <div className="mx-auto mt-6 w-72 text-center">
-        <Button
-          href="https://drive.google.com/file/d/1bEOh2yexuXkqOxR7_wvIx8uleM0tjA_W/view?usp=sharing"
-          variant="secondary"
-          target="blank"
-        >
+      <div className='mx-auto mt-6 w-72 text-center'>
+        <Button href="https://drive.google.com/file/d/1Prm03j_PtenMaY0wX3t64T60sGnfVLoy/view?usp=sharing" variant="secondary" target="blank">
           Download CV
           <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
         </Button>
@@ -177,18 +191,28 @@ function Resume() {
 function Education() {
   let education = [
     {
+      institute: 'Tawwr',
+      title: 'Full stack Development trainee',
+      logo: tawwr,
+      start: '2022',
+      end: {
+        label: 'Present',
+        dateTime: new Date().getFullYear(),
+      },
+    },
+    {
       institute: 'ITI',
-      title: 'Mern Stack Developer',
+      title: 'Full stack Development trainee',
       logo: iti,
       start: '2021',
       end: '2022',
     },
     {
       institute: 'Thebes Academy',
-      title: 'Bachelor’s Degree, Manegment Information Systems',
+      title: 'Accounting and Finance (English Section)',
       logo: thebes,
       start: '2015',
-      end: '2019',
+      end: '2019'
     },
   ]
 
@@ -215,9 +239,8 @@ function Education() {
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start.label ?? role.start} until ${
-                  role.end.label ? role.end && role.start : null
-                }`}
+                aria-label={`${role.start.label ?? role.start} until ${role.end.label ? role.end && role.start : null
+                  }`}
               >
                 <time dateTime={role.start.dateTime ?? role.start}>
                   {role.start.label ?? role.start}
@@ -297,3 +320,4 @@ export default function Home() {
     </>
   )
 }
+
