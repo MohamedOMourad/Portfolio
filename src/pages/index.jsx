@@ -5,14 +5,14 @@ import Link from 'next/link'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import {
-  TwitterIcon,
-  InstagramIcon,
   GitHubIcon,
+  InstagramIcon,
   LinkedInIcon,
+  TwitterIcon,
 } from '@/components/SocialIcons'
+import iti from '@/images/logos/iti.jpg'
 import nagwa from '@/images/logos/logo-shape.svg'
 import thebes from '@/images/logos/thebes.jpg'
-import iti from '@/images/logos/iti.jpg'
 
 function MailIcon(props) {
   return (
@@ -116,7 +116,7 @@ function Resume() {
       company: 'Nagwa',
       title: 'Full stack Developer',
       logo: nagwa,
-      start: 'jan, 2023',
+      start: 'Dec, 2022',
       end: 'present',
     },
   ]
@@ -163,7 +163,7 @@ function Resume() {
       </ol>
       <div className="mx-auto mt-6 w-72 text-center">
         <Button
-          href="https://drive.google.com/file/d/1bEOh2yexuXkqOxR7_wvIx8uleM0tjA_W/view?usp=sharing"
+          href="https://drive.google.com/file/d/1wF4VqZAsuMLu_Eh2fuWb6zLo-zTE0JYz/view?usp=sharing"
           variant="secondary"
           target="blank"
         >
